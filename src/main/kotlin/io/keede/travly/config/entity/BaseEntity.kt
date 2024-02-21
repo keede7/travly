@@ -9,7 +9,7 @@ import java.time.ZonedDateTime
  * Created on 2024/02/20
  */
 @MappedSuperclass
-internal open class BaseEntity {
+open class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
