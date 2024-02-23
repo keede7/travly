@@ -15,7 +15,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 @Entity
 @Table(name = "user_t")
 @AttributeOverride(name = "id", column = Column(name = "user_id"))
-class User(
+class UserEntity(
     @Column(name = "email", nullable = false, length = 50)
     private val email: String,
     @Column(name = "password", nullable = false)

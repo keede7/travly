@@ -1,6 +1,6 @@
 package io.keede.travly.domains.user.service
 
-import io.keede.travly.domains.user.entity.User
+import io.keede.travly.domains.user.entity.UserEntity
 import io.keede.travly.domains.user.service.adapter.UserReader
 import org.springframework.stereotype.Service
 
@@ -12,5 +12,5 @@ import org.springframework.stereotype.Service
 class UserQueryService(
     private val userReader: UserReader
 ) {
-    fun getById(userId: Long): User = userReader.findById(userId)
+    fun getById(userId: Long): UserEntity = userReader.findById(userId)
 }

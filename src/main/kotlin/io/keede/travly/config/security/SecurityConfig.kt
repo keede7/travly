@@ -1,10 +1,16 @@
 package io.keede.travly.config.security
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.core.userdetails.UserDetailsService
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
 
 /**
@@ -12,15 +18,23 @@ import org.springframework.security.web.SecurityFilterChain
  * Created on 2024/02/21
  */
 @Configuration
-class SecurityConfig {
+class SecurityConfig(
+    private val userDetailsService: UserDetailsService,
+    private val objectMapper: ObjectMapper
+) {
 
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
 
         val authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder::class.java)
 
-        val authenticationManager = authenticationManagerBuilder.build();
-        http.authenticationManager(authenticationManager)
+        authenticationManagerBuilder.userDetailsService(this.userDetailsService)
+        val authenticationManager = authenticationManagerBuilder
+            .build()
+
+        http
+            .authenticationManager(authenticationManager)
+//            .userDetailsService(this.userDetailsService)
 
         http
             .formLogin { formLogin ->
@@ -36,6 +50,10 @@ class SecurityConfig {
                     .anyRequest()
                     .permitAll()
             }
+//            .addFilterAt(
+//                this.loginFilter(authenticationManager),
+//                UsernamePasswordAuthenticationFilter::class.java
+//            )
             .headers { header ->
                 header.frameOptions { frameOption ->
                     frameOption.sameOrigin()
@@ -44,4 +62,14 @@ class SecurityConfig {
 
         return http.build();
     }
+
+    @Bean
+    fun passwordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
+
+    fun loginFilter(authenticationManager: AuthenticationManager): LoginFilter =
+        LoginFilter(
+            this.objectMapper,
+            authenticationManager
+        )
+
 }
