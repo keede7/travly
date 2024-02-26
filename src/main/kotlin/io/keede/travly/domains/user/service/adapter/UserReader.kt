@@ -6,6 +6,7 @@ import io.keede.travly.domains.user.entity.UserRepository
 import io.keede.travly.exception.service.BusinessException
 import jakarta.annotation.PostConstruct
 import org.springframework.security.core.userdetails.UsernameNotFoundException
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -16,7 +17,8 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 @Transactional(readOnly = true)
 class UserReader(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val passwordEncoder: PasswordEncoder,
 ) {
 
     fun findById(userId: Long): UserEntity =
@@ -35,7 +37,7 @@ class UserReader(
         this.userRepository.save(
             UserEntity(
                 "test",
-                "1212"
+                this.passwordEncoder.encode("1212")
             )
         )
     }

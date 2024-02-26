@@ -7,8 +7,6 @@ import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.core.userdetails.UserDetailsService
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
@@ -34,7 +32,6 @@ class SecurityConfig(
 
         http
             .authenticationManager(authenticationManager)
-//            .userDetailsService(this.userDetailsService)
 
         http
             .formLogin { formLogin ->
@@ -50,10 +47,10 @@ class SecurityConfig(
                     .anyRequest()
                     .permitAll()
             }
-//            .addFilterAt(
-//                this.loginFilter(authenticationManager),
-//                UsernamePasswordAuthenticationFilter::class.java
-//            )
+            .addFilterAt(
+                this.loginFilter(authenticationManager),
+                UsernamePasswordAuthenticationFilter::class.java
+            )
             .headers { header ->
                 header.frameOptions { frameOption ->
                     frameOption.sameOrigin()
@@ -62,9 +59,6 @@ class SecurityConfig(
 
         return http.build();
     }
-
-    @Bean
-    fun passwordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
 
     fun loginFilter(authenticationManager: AuthenticationManager): LoginFilter =
         LoginFilter(
