@@ -11,7 +11,8 @@ data class AuthenticationDetail(
     private val email: String,
     private val password: String,
     private val authorities: MutableCollection<out GrantedAuthority>?
-) : User(email, password, authorities) {
-
-
-}
+) : User(
+    email,
+    password,
+    authorities
+)

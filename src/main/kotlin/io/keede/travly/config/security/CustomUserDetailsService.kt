@@ -14,7 +14,9 @@ class CustomUserDetailsService(
     private val userReader: UserReader
 ) : UserDetailsService {
 
-    override fun loadUserByUsername(email: String): UserDetails {
+    override fun loadUserByUsername(
+        email: String
+    ): UserDetails {
         println(String.format("email : %s", email))
 
         return this.userReader.findAuthenticationByEmail(email)

@@ -5,7 +5,9 @@ package io.keede.travly.exception
  * @author keede
  * Created on 2024/02/20
  */
-class ApiResponse<T : ErrorResponse>(errors: T) {
+class ApiResponse<T : ErrorResponse>(
+    errors: T
+) {
 
     private val code: Int
     private val message: String

@@ -12,5 +12,7 @@ import org.springframework.stereotype.Service
 class UserQueryService(
     private val userReader: UserReader
 ) {
-    fun getById(userId: Long): UserEntity = userReader.findById(userId)
+    fun getById(
+        userId: Long
+    ): UserEntity = userReader.findById(userId)
 }

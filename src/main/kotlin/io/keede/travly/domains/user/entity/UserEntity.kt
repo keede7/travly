@@ -10,8 +10,13 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
  * Created on 2024/02/20
  */
 @Entity
-@Table(name = "user_t")
-@AttributeOverride(name = "id", column = Column(name = "user_id"))
+@Table(
+    name = "user_t"
+)
+@AttributeOverride(
+    name = "id",
+    column = Column(name = "user_id")
+)
 class UserEntity(
     @Column(name = "email", nullable = false, length = 50)
     private val email: String,
@@ -24,13 +29,18 @@ class UserEntity(
     constructor(
         email: String,
         password: String
-    ): this(email, password, UserRole.MEMBER)
+    ): this(
+        email,
+        password,
+        UserRole.MEMBER
+    )
 
     fun toAuthenticationDetail(): AuthenticationDetail {
         return AuthenticationDetail(
             this.email,
             this.password,
-            listOf(this.role.typeName).stream()
+            listOf(this.role.typeName)
+                .stream()
                 .map(::SimpleGrantedAuthority)
                 .toList()
         )

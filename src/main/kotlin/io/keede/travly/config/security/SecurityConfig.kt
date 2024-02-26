@@ -60,7 +60,9 @@ class SecurityConfig(
         return http.build();
     }
 
-    fun loginFilter(authenticationManager: AuthenticationManager): LoginFilter =
+    fun loginFilter(
+        authenticationManager: AuthenticationManager
+    ): LoginFilter =
         LoginFilter(
             this.objectMapper,
             authenticationManager

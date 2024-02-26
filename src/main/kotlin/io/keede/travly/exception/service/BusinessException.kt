@@ -17,17 +17,24 @@ class BusinessException : RuntimeException {
 
     constructor(
         errorResponse: ErrorResponse
-    ) : super(errorResponse.message) {
+    ) : super(
+        errorResponse.message
+    ) {
         this.errorResponse = errorResponse
     }
 
     constructor(
         errorResponse: ErrorResponse,
         message: String?
-    ) : super(errorResponse.message) {
+    ) : super(
+        errorResponse.message
+    ) {
         this.errorResponse = errorResponse
         println(message)
     }
 
-    fun toApiResponse(): ApiResponse<ErrorResponse> = ApiResponse(this.errorResponse)
+    fun toApiResponse(): ApiResponse<ErrorResponse> =
+        ApiResponse(
+            this.errorResponse
+        )
 }

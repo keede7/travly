@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RestController
 class SampleController {
 
     @GetMapping("/authentication")
-    fun authentication(httpServletRequest:HttpServletRequest) : Unit {
+    fun authentication(
+        httpServletRequest:HttpServletRequest
+    ) : Unit {
         println("httpServletRequest.session = ${httpServletRequest.session}")
         println("SecurityContextHolder.getContext().authentication = ${SecurityContextHolder.getContext().authentication}")
     }
