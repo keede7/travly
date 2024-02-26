@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.AuthenticationServiceException
 import org.springframework.security.core.Authentication
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler
 import org.springframework.security.web.context.DelegatingSecurityContextRepository
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository
 import org.springframework.security.web.context.RequestAttributeSecurityContextRepository
@@ -18,14 +19,16 @@ import org.springframework.security.web.context.RequestAttributeSecurityContextR
  */
 class LoginFilter(
     private val objectMapper: ObjectMapper,
-    private val authenticationManager: AuthenticationManager
+    private val authenticationManager: AuthenticationManager,
+    private val successHandler: AuthenticationSuccessHandler
 ) : AbstractAuthenticationProcessingFilter(
     "/api/login",
-    authenticationManager
+    authenticationManager,
 ) {
 
     init {
-        setSecurityContextRepository(
+        super.setAuthenticationSuccessHandler(this.successHandler)
+        super.setSecurityContextRepository(
             DelegatingSecurityContextRepository(
                 listOf(
                     HttpSessionSecurityContextRepository(),

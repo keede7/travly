@@ -9,6 +9,7 @@ enum class ErrorResponse(
     val message: String
 ) {
 
+    SUCCESS(200,"요청 성공"),
     COMMON(1000, "요청에 실패 했습니다.")
 
 }
