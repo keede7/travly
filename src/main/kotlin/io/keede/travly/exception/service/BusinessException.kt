@@ -1,7 +1,7 @@
 package io.keede.travly.exception.service
 
 import io.keede.travly.exception.ApiResponse
-import io.keede.travly.exception.ErrorResponse
+import io.keede.travly.exception.DetailResponse
 
 /**
  * @author keede
@@ -9,32 +9,32 @@ import io.keede.travly.exception.ErrorResponse
  */
 class BusinessException : RuntimeException {
 
-    private val errorResponse: ErrorResponse
+    private val detailResponse: DetailResponse
 
-    constructor() : super(ErrorResponse.COMMON.message) {
-        this.errorResponse = ErrorResponse.COMMON
+    constructor() : super(DetailResponse.COMMON.message) {
+        this.detailResponse = DetailResponse.COMMON
     }
 
     constructor(
-        errorResponse: ErrorResponse
+        detailResponse: DetailResponse
     ) : super(
-        errorResponse.message
+        detailResponse.message
     ) {
-        this.errorResponse = errorResponse
+        this.detailResponse = detailResponse
     }
 
     constructor(
-        errorResponse: ErrorResponse,
+        detailResponse: DetailResponse,
         message: String?
     ) : super(
-        errorResponse.message
+        detailResponse.message
     ) {
-        this.errorResponse = errorResponse
+        this.detailResponse = detailResponse
         println(message)
     }
 
-    fun toApiResponse(): ApiResponse<ErrorResponse> =
+    fun toApiResponse(): ApiResponse<DetailResponse> =
         ApiResponse(
-            this.errorResponse
+            this.detailResponse
         )
 }

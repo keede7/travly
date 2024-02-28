@@ -4,7 +4,7 @@ package io.keede.travly.exception
  * @author kyh
  * Created on 2024/02/20
  */
-enum class ErrorResponse(
+enum class DetailResponse(
     val code: Int,
     val message: String
 ) {

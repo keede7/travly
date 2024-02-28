@@ -1,8 +1,7 @@
 package io.keede.travly.config.security
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import io.keede.travly.exception.ApiResponse
-import io.keede.travly.exception.ErrorResponse
+import io.keede.travly.exception.DetailResponse
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.http.MediaType
@@ -31,7 +30,7 @@ class CustomAuthenticationSuccessHandler(
 
         response.writer.write(
             this.objectMapper.writeValueAsString(
-                ErrorResponse.SUCCESS
+                DetailResponse.SUCCESS
             )
         )
     }

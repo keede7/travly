@@ -5,7 +5,7 @@ package io.keede.travly.exception
  * @author keede
  * Created on 2024/02/20
  */
-class ApiResponse<T : ErrorResponse>(
+class ApiResponse<T : DetailResponse>(
     errors: T
 ) {
 
