@@ -6,7 +6,7 @@ package io.keede.travly.exception
  */
 enum class DetailResponse(
     val code: Int,
-    val message: String
+    val message: String,
 ) {
 
     SUCCESS(200,"요청 성공"),

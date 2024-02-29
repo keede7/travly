@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service
  */
 @Service
 class UserQueryService(
-    private val userReader: UserReader
+    private val userReader: UserReader,
 ) {
     fun getById(
-        userId: Long
+        userId: Long,
     ): UserEntity = userReader.findById(userId)
 }

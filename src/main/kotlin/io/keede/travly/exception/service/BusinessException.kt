@@ -11,7 +11,11 @@ class BusinessException : RuntimeException {
 
     private val detailResponse: DetailResponse
 
-    constructor() : super(DetailResponse.COMMON.message) {
+    constructor(
+
+    ) : super(
+        DetailResponse.COMMON.message
+    ) {
         this.detailResponse = DetailResponse.COMMON
     }
 
@@ -25,7 +29,7 @@ class BusinessException : RuntimeException {
 
     constructor(
         detailResponse: DetailResponse,
-        message: String?
+        message: String
     ) : super(
         detailResponse.message
     ) {

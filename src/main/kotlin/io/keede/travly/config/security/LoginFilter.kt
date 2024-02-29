@@ -32,7 +32,7 @@ class LoginFilter(
             DelegatingSecurityContextRepository(
                 listOf(
                     HttpSessionSecurityContextRepository(),
-                    RequestAttributeSecurityContextRepository()
+                    RequestAttributeSecurityContextRepository(),
                 )
             )
         )
@@ -40,7 +40,7 @@ class LoginFilter(
 
     override fun attemptAuthentication(
         request: HttpServletRequest,
-        response: HttpServletResponse
+        response: HttpServletResponse,
     ): Authentication {
 
         if (request.method.equals(HttpMethod.POST)) {

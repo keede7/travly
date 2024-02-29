@@ -22,14 +22,14 @@ class UserReader(
 ) {
 
     fun findById(
-        userId: Long
+        userId: Long,
     ): UserEntity =
         this.userRepository.findById(userId)
             .orElseThrow { BusinessException() }
 
 
     fun findAuthenticationByEmail(
-        email: String
+        email: String,
     ): AuthenticationDetail =
         this.userRepository.findByEmail(email)
             .orElseThrow { UsernameNotFoundException("등록한 정보를 찾을 수 없습니다.") }

@@ -19,11 +19,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 class SecurityConfig(
     private val userDetailsService: UserDetailsService,
-    private val objectMapper: ObjectMapper
+    private val objectMapper: ObjectMapper,
 ) {
 
     @Bean
-    fun filterChain(http: HttpSecurity): SecurityFilterChain {
+    fun filterChain(
+        http: HttpSecurity
+    ): SecurityFilterChain {
 
         val authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder::class.java)
 

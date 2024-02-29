@@ -6,7 +6,7 @@ package io.keede.travly.exception
  * Created on 2024/02/20
  */
 class ApiResponse<T : DetailResponse>(
-    errors: T
+    errors: T,
 ) {
 
     private val code: Int

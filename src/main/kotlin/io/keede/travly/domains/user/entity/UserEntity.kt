@@ -23,16 +23,16 @@ class UserEntity(
     @Column(name = "password", nullable = false)
     private val password: String,
     @Enumerated(EnumType.STRING)
-    private val role: UserRole
+    private val role: UserRole,
 ) : BaseEntity() {
 
     constructor(
         email: String,
-        password: String
+        password: String,
     ): this(
         email,
         password,
-        UserRole.MEMBER
+        UserRole.MEMBER,
     )
 
     fun toAuthenticationDetail(): AuthenticationDetail {
@@ -42,7 +42,7 @@ class UserEntity(
             listOf(this.role.typeName)
                 .stream()
                 .map(::SimpleGrantedAuthority)
-                .toList()
+                .toList(),
         )
     }
 }
